@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  #annotations:
+  #  kubernetes.io/tls-acme: "true"
+  hosts:
+   - host: vscode.chengleqi.com
+     paths:
+       - /
+  ingressClassName: "nginx"
+  #tls:
+  #  - secretName: code-server
+  #    hosts:
+  #      - code-server.example.loc
