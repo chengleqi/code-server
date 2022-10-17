@@ -56,6 +56,7 @@ spec:
 {{ tpl .Values.extraContainers . | indent 8}}
 {{- end }}
         - name: {{ .Chart.Name }}
+          annotations: {{ .Values.podAnnotations }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.securityContext.enabled }}
