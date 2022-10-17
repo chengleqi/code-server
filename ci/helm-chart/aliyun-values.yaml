@@ -32,3 +32,12 @@ persistence:
 podAnnotations: 
   k8s.aliyun.com/eci-use-specs: "ecs.gn6i-c16g1.4xlarge" #根据需要替换您接受的ECS规格。
   k8s.aliyun.com/eci-spot-strategy: "SpotAsPriceGo" #随市场出价策略。
+
+##
+## Init containers parameters:
+## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
+##
+volumePermissions:
+  enabled: true
+  securityContext:
+    runAsUser: 1000
