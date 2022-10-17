@@ -5,7 +5,7 @@ ingress:
   hosts:
    - host: vscode.chengleqi.com
      paths:
-       - /chengleqi
+       - /
   ingressClassName: "nginx"
   #tls:
   #  - secretName: code-server
