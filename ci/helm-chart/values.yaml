@@ -38,18 +38,16 @@ podSecurityContext: {}
 priorityClassName: ""
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 8080
 
 ingress:
-  enabled: false
+  enabled: enable
   #annotations:
   #  kubernetes.io/tls-acme: "true"
   hosts:
-   - host: vscode.chengleqi.com
-     paths:
-       - /
-  ingressClassName: "nginx"
+   - host: ai.chengleqi.com
+  # ingressClassName: "nginx"
   #tls:
   #  - secretName: code-server
   #    hosts:

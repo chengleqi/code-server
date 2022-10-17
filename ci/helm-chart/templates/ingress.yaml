@@ -37,8 +37,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ . }}
+          - path: {{ cat "/" .Release.Name }}
             pathType: Prefix
             backend:
               service:
