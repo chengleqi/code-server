@@ -20,6 +20,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "code-server.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations: {{ .Values.podAnnotations }}
     spec:
       imagePullSecrets: {{- toYaml .Values.imagePullSecrets | nindent 8 }}
       {{- if .Values.hostnameOverride }}
@@ -57,9 +58,6 @@ spec:
 {{- end }}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          annotations: 
-            k8s.aliyun.com/eci-use-specs: "ecs.gn6i-c16g1.4xlarge" #根据需要替换您接受的ECS规格。
-            k8s.aliyun.com/eci-spot-strategy: "SpotAsPriceGo" #随市场出价策略。
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.securityContext.enabled }}
           securityContext:
