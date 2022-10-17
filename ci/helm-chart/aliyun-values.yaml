@@ -41,3 +41,7 @@ volumePermissions:
   enabled: false
 
 password: test
+
+resources: 
+  limits:
+    nvidia.com/gpu: '1' #容器所需的GPU个数
