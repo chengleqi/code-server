@@ -28,7 +28,9 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
+podAnnotations: 
+  k8s.aliyun.com/eci-use-specs: "ecs.gn6i-c16g1.4xlarge" #根据需要替换您接受的ECS规格。
+  k8s.aliyun.com/eci-spot-strategy: "SpotAsPriceGo" #随市场出价策略。
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -40,14 +42,14 @@ service:
   port: 8080
 
 ingress:
-  enabled: false
+  enabled: true
   #annotations:
   #  kubernetes.io/tls-acme: "true"
-  #hosts:
-  #  - host: code-server.example.loc
-  #    paths:
-  #      - /
-  ingressClassName: ""
+  hosts:
+   - host: vscode.chengleqi.com
+     paths:
+       - /
+  ingressClassName: "nginx"
   #tls:
   #  - secretName: code-server
   #    hosts:
@@ -80,9 +82,7 @@ extraVars: []
 ## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
 ##
 volumePermissions:
-  enabled: true
-  securityContext:
-    runAsUser: 0
+  enabled: false
 
 ## Pod Security Context
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
@@ -92,18 +92,19 @@ securityContext:
   fsGroup: 1000
   runAsUser: 1000
 
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
+  limits:
   #   cpu: 100m
   #   memory: 128Mi
+    nvidia.com/gpu: '1' #容器所需的GPU个数
   # requests:
   #  cpu: 100m
   #  memory: 1000Mi
-
+    
 nodeSelector: {}
 
 tolerations: []
@@ -124,7 +125,7 @@ persistence:
   accessMode: ReadWriteOnce
   size: 10Gi
   annotations: {}
-  # existingClaim: ""
+  existingClaim: "chengleqi-vscode-volume-pvc"
   # hostPath: /data
 
 lifecycle:
@@ -196,3 +197,6 @@ extraConfigmapMounts: []
   #   subPath: certificates.crt # (optional)
   #   configMap: certs-configmap
   #   readOnly: true
+
+# default vscode password
+password: test
