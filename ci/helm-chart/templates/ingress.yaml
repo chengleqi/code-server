@@ -44,19 +44,16 @@ spec:
                 name: {{ $fullName }}
                 port: 
                   number: {{ $svcPort }}
-          {{- end }}
     {{- end }}
   {{- else -}}
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ . }}
+          - path: {{ cat "/" .Release.Name }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
-          {{- end }}
+              servicePort: {{ $svcPort }}]
     {{- end }}
   {{- end }}
 {{- end }}
