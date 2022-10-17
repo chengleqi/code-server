@@ -7,7 +7,6 @@ metadata:
     helm.sh/chart: {{ include "code-server.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-  annotations: {{ .Values.podAnnotations }}
 spec:
   replicas: 1
   strategy:
@@ -58,6 +57,9 @@ spec:
 {{- end }}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          annotations: 
+            k8s.aliyun.com/eci-use-specs: "ecs.gn6i-c16g1.4xlarge" #根据需要替换您接受的ECS规格。
+            k8s.aliyun.com/eci-spot-strategy: "SpotAsPriceGo" #随市场出价策略。
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.securityContext.enabled }}
           securityContext:
