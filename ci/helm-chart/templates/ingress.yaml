@@ -38,7 +38,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: {{ cat "/" $releaseName }}
+          - path: {{ cat "/" $releaseName | nospace }}
             pathType: Prefix
             backend:
               service:
@@ -51,7 +51,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: {{ cat "/" $releaseName }}
+          - path: {{ cat "/" $releaseName | nospace }}
             backend:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
