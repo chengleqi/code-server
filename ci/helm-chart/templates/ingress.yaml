@@ -38,7 +38,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: {{ cat "/" $releaseName | nospace }}
+          - path: {{ cat "/vscode/" $releaseName | nospace }}
             pathType: Prefix
             backend:
               service:
@@ -51,7 +51,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: {{ cat "/" $releaseName | nospace }}
+          - path: {{ cat "/vscode/" $releaseName | nospace }}
             backend:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}

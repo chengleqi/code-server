@@ -43,7 +43,8 @@ service:
 
 ingress:
   enabled: enable
-  #annotations:
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: train-stripprefixregex@kubernetescrd
   #  kubernetes.io/tls-acme: "true"
   hosts:
    - host: vscode.chengleqi.com
