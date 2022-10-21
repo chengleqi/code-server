@@ -47,7 +47,9 @@ ingress:
   #  kubernetes.io/tls-acme: "true"
   hosts:
    - host: .chengleqi.com
-  # ingressClassName: "nginx"
+     paths: 
+     - /
+  ingressClassName: "nginx"
   #tls:
   #  - secretName: code-server
   #    hosts:
