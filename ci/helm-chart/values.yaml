@@ -43,11 +43,10 @@ service:
 
 ingress:
   enabled: enable
-  annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: train-stripprefixregex@kubernetescrd
+  # annotations:
   #  kubernetes.io/tls-acme: "true"
   hosts:
-   - host: vscode.chengleqi.com
+   - host: .chengleqi.com
   # ingressClassName: "nginx"
   #tls:
   #  - secretName: code-server
@@ -120,11 +119,11 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  # storageClass: "-"
+  storageClass: "test-sc"
   accessMode: ReadWriteOnce
   size: 10Gi
   annotations: {}
-  existingClaim: "chengleqi-vscode-volume-pvc"
+  # existingClaim: "chengleqi-vscode-volume-pvc"
   # hostPath: /data
 
 lifecycle:

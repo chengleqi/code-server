@@ -35,26 +35,30 @@ spec:
   rules:
   {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion -}}
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ cat $releaseName .host | nospace | quote }}
       http:
         paths:
-          - path: {{ cat "/vscode/" $releaseName | nospace }}
+          {{- range .paths }}
+          - path: {{ . }}
             pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}
                 port: 
                   number: {{ $svcPort }}
+          {{- end }}
     {{- end }}
   {{- else -}}
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ cat $releaseName .host | nospace | quote }}
       http:
         paths:
-          - path: {{ cat "/vscode/" $releaseName | nospace }}
+          {{- range .paths }}
+          - path: {{ . }}
             backend:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
+          {{- end }}
     {{- end }}
   {{- end }}
 {{- end }}
