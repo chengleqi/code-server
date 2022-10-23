@@ -43,13 +43,14 @@ service:
 
 ingress:
   enabled: enable
-  # annotations:
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: dev-stripprefixregex@kubernetescrd
   #  kubernetes.io/tls-acme: "true"
   hosts:
    - host: ai.chengleqi.com
     #  paths: 
     #  - /
-  ingressClassName: "nginx"
+  # ingressClassName: "nginx"
   #tls:
   #  - secretName: code-server
   #    hosts:
