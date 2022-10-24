@@ -51,10 +51,10 @@ ingress:
     #  paths: 
     #  - /
   # ingressClassName: "nginx"
-  #tls:
-  #  - secretName: code-server
-  #    hosts:
-  #      - code-server.example.loc
+  tls:
+   - secretName: cert
+     hosts:
+       - ai.chengleqi.com
 
 # Optional additional arguments
 extraArgs: []
